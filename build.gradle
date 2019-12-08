@@ -1,0 +1,45 @@
+plugins {
+    id 'groovy'
+    id 'java'
+}
+
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+allprojects {
+
+    repositories {
+
+        def microEJUrl = "http://developer.microej.com/4.1/ivy/artifacts"
+
+        mavenCentral()
+        //foundation
+        ivy {
+            ivyPattern("$microEJUrl/[orgPath]/[module]/[revision]/ivy-[revision].xml")
+            artifactPattern("$microEJUrl/[orgPath]/[module]/[revision]/[module]-[revision].jar")
+        }
+
+        //property loader
+        ivy {
+            ivyPattern("$microEJUrl/[orgPath]/property-loader/[revision]/ivy-[revision].xml")
+            artifactPattern("$microEJUrl/[orgPath]/property-loader/[revision]/property-loader-[revision].jar")
+        }
+    }
+}
+
+dependencies {
+    compile group: 'ej.api', name: 'kf', version: '1.4.4'
+    compile group: 'ej.library.wadapps', name: 'framework', version: '1.7.2'
+    compile group: 'ej.library.runtime', name: 'basictool', version: '1.2.2'
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+}
+
+//adding this runs junit tests with gradle
+
+test {
+    useJUnitPlatform()
+}
+
