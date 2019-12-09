@@ -1,6 +1,9 @@
 plugins {
     id 'groovy'
     id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.61'
+
+
 }
 
 version '1.0-SNAPSHOT'
@@ -35,6 +38,7 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 //adding this runs junit tests with gradle
@@ -48,5 +52,16 @@ test {
 buildScan {
     termsOfServiceUrl = "https://gradle.com/terms-of-service"
     termsOfServiceAgree = "yes"
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
